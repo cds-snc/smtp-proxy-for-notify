@@ -32,7 +32,7 @@ func TestInitConfig(t *testing.T) {
 	assert.Equal(t, "API key must start with gcntfy and be at least 81 characters", err.Error())
 
 	// Test case 5: Invalid Notify Template ID
-	viper.Set("Notify_ApiKey", "gcntfy-test-00000000-0000-4000-8000-000000000000-00000000-0000-4000-8000-000000000000")
+	viper.Set("Notify_ApiKey", "gcntfy-test-00000000-0000-4000-8000-000000000000-00000000-0000-4000-8000-0000000000000")
 	viper.Set("Notify_Template_Id", "invalid_template_id")
 	_, err = initConfig()
 	assert.Equal(t, "notify Template ID must be a UUIDv4", err.Error())
