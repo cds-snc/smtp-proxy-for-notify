@@ -1,0 +1,16 @@
+# Metadata for the backstage catalog accessible at this link:
+# https://backstage.cdssandbox.xyz/
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: smtp-proxy-for-notify
+  title: SMTP Proxy for Notify
+  description: A simple SMTP proxy for Notify that bridges the gap between the SMTP protocol and the Notify API.
+  annotations:
+    github.com/project-slug: cds-snc/smtp-proxy-for-notify
+spec:
+  type: library
+  owner: group:cds-snc/notify-dev
+  system: gc-notification
+  lifecycle: production
