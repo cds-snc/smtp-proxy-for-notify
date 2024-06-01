@@ -1,4 +1,4 @@
-FROM alpine:3.6 as alpine
+FROM alpine:3.6@sha256:66790a2b79e1ea3e1dabac43990c54aca5d1ddf268d9a5a0285e4167c8b24475 as alpine
 
 RUN apk add -U --no-cache ca-certificates
 
