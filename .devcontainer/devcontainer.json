@@ -3,7 +3,7 @@
 {
 	"name": "Go",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/go:1-1.21-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/go:1-1.21-bullseye@sha256:d7a51293c5f6526ac8c3e6fe41f567067d05311f644cd6bdc19355f952dc0776",
 	"containerEnv": {
 		"SHELL": "/bin/zsh"
 	},
