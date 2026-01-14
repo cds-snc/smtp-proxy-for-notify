@@ -15,6 +15,7 @@ TEST_SENDER=author@localhost
 TEST_RECIPIENT=max.neuvians+staging-notify-1@cds-snc.ca
 
 .PHONY: dev generate-keys release release-test script-test-python test
+.DEFAULT_GOAL := release
 
 dev:
 	@echo "Starting dev server..."
