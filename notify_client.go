@@ -92,28 +92,35 @@ func sendEmail(client *NotifyClient, email *NotifyEmail) error {
 		req.Header.Set("Content-Type", contentType)
 		req.Header.Set("Authorization", fmt.Sprintf("ApiKey-v1 %s", client.ApiKey))
 
-		resp, err := client.Client.Do(req)
-
-		if err != nil {
-			log.Error().Msgf("Error sending email: %s", err)
+		if err := doSendEmail(client.Client, req); err != nil {
 			return err
-		}
-
-		defer resp.Body.Close()
-
-		if resp.StatusCode != 201 {
-			log.Error().Msgf("Unexpected status code: %d", resp.StatusCode)
-			respbody, err := io.ReadAll(resp.Body)
-
-			if err != nil {
-				log.Error().Msgf("Error reading response body: %s", err)
-				return err
-			}
-			log.Error().Msgf("Response: %s", respbody)
-
-			return fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 		}
 	}
 
 	return nil
+}
+
+func doSendEmail(client *http.Client, req *http.Request) error {
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Error().Msgf("Error sending email: %s", err)
+		return err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode == 201 {
+		return nil
+	}
+
+	// A non-201 status code so craft the error.
+	log.Error().Msgf("Unexpected status code: %d", resp.StatusCode)
+	respbody, err := io.ReadAll(resp.Body)
+
+	if err != nil {
+		log.Error().Msgf("Error reading response body: %s", err)
+		return err
+	}
+	log.Error().Msgf("Response: %s", respbody)
+
+	return fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 }
